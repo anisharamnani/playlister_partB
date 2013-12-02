@@ -37,13 +37,15 @@ class App
 	#####2. What Would You Say - Bands Blake Liked in 1996  
 
 	def search_by_artist 
-		puts "Which artist interests you?"
+		puts "Which artist would you like to listen to?"
 		user_input = gets.chomp.upcase 
-		unless Artist::ARTISTS.detect{|artist| artist.name == artist_name} 
-			puts "Sorry, I don't understand you. Please try again."
-			user_input = gets.chomp.upcase 
+		searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
+		if searched.nil? 
+			puts "Sorry, I don't understand. Please try again."
+		else 
+			searched 
 		end 
-		user_input 
+		searched 
 	end  										
 
 	def search_by_genre genre 
@@ -57,5 +59,6 @@ app = App.new
 app.welcome_message
 user_input = app.browse
 app.list_names(user_input)
+app.search_by_artist
 
 
