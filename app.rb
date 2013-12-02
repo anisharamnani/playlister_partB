@@ -56,6 +56,13 @@ class App
 		searched.songs.each_with_index{|song, i| puts "#{i+1} #{song.name}"}
 	end  	
 
+	# def song_details
+	# 	puts "Which song do you want info about?"
+	# 	user_input = gets.chomp.upcase 
+	# 	searched = Genre::GENRES.detect{|genre| genre.name.upcase == user_input}
+		
+	# end 
+
 end 
 					 								
 
