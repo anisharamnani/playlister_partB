@@ -51,15 +51,24 @@ class App
 	def artist_details searched
 		puts "#{searched.name}"
 		searched.songs.each do |song|
-			puts searched.song
+			puts song 
 		end 
 	end  	
 						
 
-	def search_by_genre genre 
+	def search_by_genre 
+		puts "Which genre would you like to listen to?"
+		user_input = gets.chomp 
+		searched = Genre::GENRES.detect{|genre| genre.name == user_input}
+		while searched == nil 
+			puts "Sorry, I don't understand you. Please try again."
+			user_input = gets.chomp 
+			searched = Genre::GENRES.detect{|genre| genre.name == user_input}
+		end 
+		searched 
 	end 
 
-	def songs_page song
+	def genre_details searched 
 	end 								
 end 
 
