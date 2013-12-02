@@ -40,45 +40,24 @@ class App
 			
 			puts "Which genre would you like to listen to?"
 			user_input = gets.chomp.upcase
+
 			searched = Genre::GENRES.detect{|genre| genre.name.upcase == user_input}
 			while searched == nil 
 				puts "Sorry, I don't understand you. Please try again."
-				user_input = gets.chomp 
+				user_input = gets.chomp.upcase
 				searched = Genre::GENRES.detect{|genre| genre.name.upcase == user_input}
 			end  
+		end 
 		searched 
 	end
 
-	####Dave Matthews Band - 2 Songs  
-	#####1. Tripping Billies - Uncool Jam Bands  
-	#####2. What Would You Say - Bands Blake Liked in 1996  
-
-	# def search_by_artist 
-	# 	puts "Which artist would you like to listen to?"
-	# 	user_input = gets.chomp
-	# 	searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
-	# 	while searched == nil
-	# 		puts "Sorry, I don't understand you. Please try again."
-	# 		user_input = gets.chomp
-	# 		searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
-	# 	end 
-	# 	searched
-	# end 
-
 	def artist_details searched
-		puts "#{searched.name}"
-		searched.songs.each do |song|
-			puts song.name
-		end 
+		puts "#{searched.name.capitalize}:"
+		searched.songs.each_with_index{|song, i| puts "#{i+1} #{song.name}"}
 	end  	
-						
 
-		searched 
-	end 
-
-	def genre_details searched 
-	end 								
 end 
+					 								
 
 app = App.new 
 app.welcome_message
