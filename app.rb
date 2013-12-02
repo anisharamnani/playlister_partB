@@ -33,7 +33,7 @@ class App
 				puts "Sorry, I don't understand you. Please try again."
 				user_input = gets.chomp
 				searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
-			end 
+			end
 		else 
 			genre = Genre::GENRES.sort_by {|genre| genre.artists.size}
 			genre.each_with_index {|genre, i| puts "#{i+1}. #{genre.name.capitalize}: #{genre.artists.size} Artists"}
@@ -51,25 +51,65 @@ class App
 		searched 
 	end
 
+	def song_selector 
+		puts "Please select a song."
+		song_name = gets.chomp.upcase
+		searched = nil
+		Artist::ARTISTS.each do |artist|
+			searched = artist.songs.detect{|song| song.name.upcase == song_name} unless artist.songs.detect{|song| song.name.upcase == song_name}.nil?
+			# searched is the song OBJECT whose @name matches song_name
+		end 
+		while searched == nil 
+				puts "Sorry, I don't understand you. Please try again."
+				song_name = gets.chomp.upcase
+				Artist::ARTISTS.each do |artist|
+					searched = artist.songs.detect{|song| song.name.upcase == song_name} unless artist.songs.detect{|song| song.name.upcase == song_name}.nil?
+					# searched is the song OBJECT whose @name matches song_name
+				end 
+		end 
+		searched
+	end 
+
+	def song_details searched
+		Artist::ARTISTS.each do |artist|
+			artist.songs.each do |song|
+				# searched is a song object
+				if song == searched 
+					puts "Song: #{song.name}"
+					puts "Artist: #{artist.name}"
+					puts "Genre: #{song.genre.name.capitalize}"
+				end 
+			end 
+		end 
+	end 
+
+
 	def artist_details searched
 		puts "#{searched.name.capitalize}:"
 		searched.songs.each_with_index{|song, i| puts "#{i+1} #{song.name}"}
-	end  	
+	end
 
-	# def song_details
-	# 	puts "Which song do you want info about?"
-	# 	user_input = gets.chomp.upcase 
-	# 	searched = Genre::GENRES.detect{|genre| genre.name.upcase == user_input}
-		
-	# end 
+	def play
+		welcome_message
+		user_input = browse
+		searched = list_names(user_input)
+		artist_details(searched)
+		searched = song_selector 
+		song_details(searched)
+	end 
 
 end 
+
+playlister = App.new
+playlister.play
+
+# app = App.new 
+# app.welcome_message
+# user_input = app.browse
+# searched = app.list_names(user_input)
+# app.artist_details(searched)
+# searched = app.song_selector 
+# app.song_details(searched)
+
 					 								
-
-app = App.new 
-app.welcome_message
-user_input = app.browse
-searched = app.list_names(user_input)
-app.artist_details(searched)
-
 
