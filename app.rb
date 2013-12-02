@@ -38,15 +38,23 @@ class App
 
 	def search_by_artist 
 		puts "Which artist would you like to listen to?"
-		user_input = gets.chomp.upcase 
+		user_input = gets.chomp
 		searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
-		if searched.nil? 
-			puts "Sorry, I don't understand. Please try again."
-		else 
-			searched 
+		while searched == nil
+			puts "Sorry, I don't understand you. Please try again."
+			user_input = gets.chomp
+			searched = Artist::ARTISTS.detect{|artist| artist.name == user_input}
 		end 
-		searched 
-	end  										
+		searched
+	end 
+
+	def artist_details searched
+		puts "#{searched.name}"
+		searched.songs.each do |song|
+			puts searched.song
+		end 
+	end  	
+						
 
 	def search_by_genre genre 
 	end 
@@ -59,6 +67,7 @@ app = App.new
 app.welcome_message
 user_input = app.browse
 app.list_names(user_input)
-app.search_by_artist
+searched = app.search_by_artist
+app.artist_details(searched)
 
 
