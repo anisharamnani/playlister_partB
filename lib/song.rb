@@ -2,6 +2,7 @@ class Song
 	attr_accessor :genre, :name
 	def initialize 
 		@genre
+		@name
 	end  
 
 	def genre=(genre)
