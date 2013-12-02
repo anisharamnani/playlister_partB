@@ -111,5 +111,12 @@ playlister.play
 # searched = app.song_selector 
 # app.song_details(searched)
 
+=begin
+1. break down code to run specs 
+2. write specs 
+3. refactor code to make it more awesome 
+4. move on to the game of life. 
+=end 
+
 					 								
 

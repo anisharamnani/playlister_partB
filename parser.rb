@@ -1,4 +1,4 @@
-require './lib/artist'
+		require './lib/artist'
 require './lib/genre'
 require './lib/song'
 require 'awesome_print'
@@ -15,12 +15,27 @@ class Parser
 		parse
 	end 
 
+	def get_artist song_entry
+		song_entry = song_entry.gsub("].mp3", "")
+		split_entry = song_entry.split(" - ")
+		artist_name = split_entry[0]
+	end
+
+	def get_song song_entry
+		song_entry = song_entry.gsub("].mp3", "")
+		split_entry = song_entry.split(" - ")
+		song_genre = split_entry[1].split(" [")
+		song_name = song_genre[0]
+	end 
+
 	def parse
 		entries.each do |entry|
 			entry = entry.gsub("].mp3", "")
 			whole = entry.split(" - ")
 			artist_name = whole[0]
+
 			song_genre = whole[1].split(" [")
+
 			song_name = song_genre[0]
 			genre_name = song_genre[1]
 
